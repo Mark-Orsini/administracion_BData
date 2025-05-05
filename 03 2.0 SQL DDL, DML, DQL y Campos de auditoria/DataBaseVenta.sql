@@ -1,6 +1,6 @@
-create database sistema_ventas;
+create database sistema_ventas_4E;
 
-use sistema_ventas;
+use sistema_ventas_4E;
 
 create table tipo_usuarios (
 id_tipo_usuario INT AUTO_INCREMENT PRIMARY KEY,
@@ -23,8 +23,6 @@ created_by INT,
 updated_by INT,
 deleted BOOLEAN DEFAULT FALSE
 );
-
-select * from tipo_usuarios;
 
 alter table usuarios ADD CONSTRAINT fk_usuario_tipo_usuario FOREIGN KEY (tipo_usuario_id) REFERENCES
 tipo_usuarios(id_tipo_usuario);
