@@ -62,3 +62,24 @@ created_by INT,
 updated_by INT,
 deleted BOOLEAN DEFAULT FALSE
 );
+
+ALTER TABLE tabla_ventas  -- Modificar tabla
+-- Agregar una restricción (FK)
+ADD CONSTRAINT fk_ventas_usuarios
+-- Añade referencia(FK)
+FOREIGN KEY (usuario_id) REFERENCES
+usuarios(id);
+
+ALTER TABLE Tabla_detalle_ventas  -- Modificar tabla
+-- Agregar una restricción (FK)
+ADD CONSTRAINT fk_tabla_detalle_ventas
+-- Añade referencia(FK)
+FOREIGN KEY (venta_id) REFERENCES
+tabla_ventas(id);
+
+ALTER TABLE detalle_ventas  -- Modificar tabla
+-- Agregar una restricción (FK)
+ADD CONSTRAINT fk_detalle_ventas_productos
+-- Añade referencia(FK)
+FOREIGN KEY (producto_id) REFERENCES
+productos(id_producto);
