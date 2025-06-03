@@ -182,20 +182,63 @@ VALUES (
     'Marcell',
     'porotoVerde17', 
     'marcellfigueroa@liceovvh.cl',
-    2,  -- tipo: Administrador
+    1,  -- tipo: Administrador
 	1, 1  -- creado por el usuario "sistema"
 ),
 (
     'Benjamin',
     'wuatonTeton',
     'benjaminrios@liceovvh.cl',
-    3,  -- tipo: Administrador
+    3,  -- tipo: Cliente
 	1, 1  -- creado por el usuario "sistema"
 ),
 (
     'Vicente',
     'brawlStar', -- bcrypt hasheado
     'manuelulloa@liceovvh.cl',
-    4,  -- tipo: Administrador
+    4,  -- tipo: Gerente
 	1, 1  -- creado por el usuario "sistema"
 );
+
+--  Muestra los usuarios activos --
+SELECT nombre_usuario
+FROM usuarios
+WHERE deleted = 'False';
+
+-- Muestra los usuarios cuyo tipo de usuario sea "Administrador" --
+SELECT nombre_usuario
+FROM usuarios
+WHERE tipo_usuario_id = 1;
+
+-- Lista los nombres de usuario que comienzan con "Cualquier letra" --
+SELECT nombre_usuario
+FROM usuarios
+WHERE nombre_usuario LIKE 'M%';
+
+--  Muestra los registros de personas creadas entre dos fechas específicas. --
+SELECT nombre_usuario
+FROM usuarios
+WHERE date(created_at) BETWEEN '2025-05-26' AND '2025-05-28';
+
+select * from usuarios;
+
+-- mis consultas --
+select *
+from usuarios
+where correo like 'm%';
+
+select *  
+from usuarios
+where nombre_usuario <> 'Benjamin';
+
+select nombre_usuario
+from usuarios
+where passwordd like 'P%' or 'M%';
+
+select *
+from usuarios
+where tipo_usuario_id = '1';
+
+select *
+from usuarios
+where id_usuario between 2 and 4;
