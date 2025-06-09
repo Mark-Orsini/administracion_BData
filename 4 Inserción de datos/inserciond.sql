@@ -200,6 +200,105 @@ VALUES (
 	1, 1  -- creado por el usuario "sistema"
 );
 
+-- tabla productos -- 
+INSERT INTO productos (
+    nombre_productos, precio, stock, created_by, updated_by
+)
+VALUES (
+    'Bebida',
+    2500, 
+    100,
+    4, -- usuario de registro 
+	4   
+
+),
+(
+    'Snack',
+    1000, 
+    70,
+    4, 
+	4  
+
+),
+(
+	'Helado',
+    1200,
+    47,
+    4,
+    4
+),
+(
+    'Galleta',
+    1000,
+    200,
+    4,
+    4
+);
+-- tabla ventas -- 
+INSERT INTO ventas (
+    usuario_id, fecha_venta, created_by, updated_by
+)
+VALUES (
+    2, 
+    NOW(),
+    2,
+    2
+),
+(
+	2,
+    NOW(),
+    2,
+    2
+),
+(
+	2,
+    NOW(),
+    2,
+    2
+),
+(
+	2,
+    NOW(),
+    2,
+    2
+);
+-- tabla ventas -- 
+INSERT INTO detalle_ventas (
+    venta_id, producto_id, cantidad_vendida, precio_unitario, created_by, updated_by
+)
+VALUES (
+    1,
+    2,
+    50,
+    100,
+    2,
+    2
+),
+(
+	5,
+    4,
+    100,
+    600,
+    2,
+    2
+),
+(
+	2,
+    1,
+    30,
+    700,
+    2,
+    2
+),
+(
+	3,
+    3,
+    50,
+    1100,
+    2,
+    2
+);
+
 --  Muestra los usuarios activos --
 SELECT nombre_usuario
 FROM usuarios
