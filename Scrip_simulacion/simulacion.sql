@@ -1,8 +1,3 @@
--- ==========================================================
--- SISTEMA DE EDUCACIÓN EN CIBERSEGURIDAD – SCRIPT MÍNIMO
--- Tablas ELIMINADAS: niveles_dificultad, tipo_simulaciones
--- ==========================================================
-
 CREATE DATABASE IF NOT EXISTS ciberseguridad_educacion;
 USE ciberseguridad_educacion;
 
@@ -35,7 +30,7 @@ CREATE TABLE estados(
 );
 
 CREATE TABLE tipo_comentario(
-    id_tipo_opinion      INT AUTO_INCREMENT PRIMARY KEY,
+    id_tipo_comentario      INT AUTO_INCREMENT PRIMARY KEY,
     nombre_tipo_comentario  VARCHAR(50) NOT NULL CHECK (nombre_tipo_comentario IN ('Ayuda','Opinion','Sugerencia','Problema')),
     descripcion_tipo     VARCHAR(100) NOT NULL CHECK (CHAR_LENGTH(descripcion_tipo) >= 3),
     /* auditoría */
@@ -101,17 +96,16 @@ CREATE TABLE datos_simulacion(
     nombre_falso VARCHAR(100),
     apellido_falso VARCHAR(100),
     correo_falso VARCHAR(255),
-    clave_falso VARCHAR(255), -- ¡La clave falsa que robarás!
+    clave_falso VARCHAR(255),
     fecha_nacimiento_falso DATE,
     genero_falso VARCHAR(20),
     numero_cuenta_falso VARCHAR(50),
     cvc_falso VARCHAR(5),
-    fecha_vencimiento_tarjeta_falso VARCHAR(10), -- Ej: "12/2025"
-
+    fecha_vencimiento_tarjeta_falso VARCHAR(10),
     -- Datos del formulario de Recuperar Cuenta
     rut_falso VARCHAR(20),
     direccion_falso TEXT,
-    correo_recuperacion_falso VARCHAR(255), -- Usamos un nombre diferente para evitar conflicto si se usa el mismo correo
+    correo_recuperacion_falso VARCHAR(255), 
     numero_telefono_falso VARCHAR(30),
     clave_anterior_falso VARCHAR(255),
     /* auditoría */
@@ -142,7 +136,7 @@ CREATE TABLE opiniones_usuarios(
     updated_by  INT,
     deleted     BOOLEAN DEFAULT FALSE,
     CONSTRAINT fk_op_usuario  FOREIGN KEY (usuario_id)       REFERENCES usuarios(id_usuario),
-    CONSTRAINT fk_op_tipo     FOREIGN KEY (tipo_opinion_id)  REFERENCES tipo_opiniones(id_tipo_opinion),
+    CONSTRAINT fk_op_tipo     FOREIGN KEY (tipo_comentario_id)  REFERENCES tipo_comentario(id_tipo_comentario),
     CONSTRAINT fk_op_sim      FOREIGN KEY (simulacion_id)    REFERENCES simulaciones(id_simulacion)
 );
 
@@ -174,21 +168,22 @@ CREATE TABLE estadisticas_usuario(
 -- DATOS INICIALES MÍNIMOS
 -- ==========================================================
 
-INSERT INTO tipo_usuarios (nombre_tipo_usuario, descripcion_tipo, created_by) VALUES
-('Administrador', 'Acceso total', 1),
-('Usuario',       'Realiza simulaciones', 1);
+INSERT INTO tipo_usuarios (nombre_tipo_usuario, descripcion_tipo) VALUES
+('Administrador', 'Acceso total'),
+('Usuario',       'Realiza simulaciones');
 
-INSERT INTO estados (nombre_estado, descripcion_estado, created_by) VALUES
-('En Progreso', 'Simulación en curso', 1),
-('Completada',  'Simulación finalizada', 1),
-('Abandonada',  'No completada', 1);
+INSERT INTO estados (nombre_estado, descripcion_estado) VALUES
+('En Progreso', 'Simulación en curso'),
+('Completada',  'Simulación finalizada'),
+('Abandonada',  'No completada');
 
-INSERT INTO tipo_opiniones (nombre_tipo_opinion, descripcion_tipo, created_by) VALUES
-('Simulacion',     'Opinión sobre una simulación', 1),
-('Sistema General','Opinión general', 1),
-('Sugerencia',     'Sugerencia de mejora', 1),
-('Problema',       'Reporte de error', 1);
+-- CORRECCIÓN: Se inserta en la tabla correcta con los nombres de columna correctos.
+INSERT INTO tipo_comentario (nombre_tipo_comentario, descripcion_tipo) VALUES
+('Ayuda',       'Solicitud de ayuda al usuario'),
+('Opinion',     'Opinión general sobre el sistema'),
+('Sugerencia',  'Sugerencia de mejora'),
+('Problema',    'Reporte de error o problema');
 
 -- Primer administrador
-INSERT INTO usuarios (nombre_usuario, correo, contrasena, tipo_usuario_id, created_by) VALUES
-('Admin', 'admin@ciberseguridad.edu', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, 1);
+INSERT INTO usuarios (nombre_usuario, correo, contrasena, tipo_usuario_id) VALUES
+('Admin', 'admin@ciberseguridad.edu', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1);
