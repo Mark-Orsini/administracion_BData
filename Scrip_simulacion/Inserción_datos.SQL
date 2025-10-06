@@ -2,7 +2,7 @@
 -- DATOS INICIALES MÍNIMOS
 -- ==========================================================
 
-INSERT INTO tipo_usuarios (nombre_tipo_usuario, descripcion_tipo) VALUES
+INSERT INTO tipos_usuarios (nombre_tipo_usuario, descripcion_tipo) VALUES
 ('Administrador', 'Acceso total'),
 ('Usuario',       'Realiza simulaciones');
 
@@ -11,7 +11,7 @@ INSERT INTO estados (nombre_estado, descripcion_estado) VALUES
 ('Completada',  'Simulación finalizada'),
 ('Abandonada',  'No completada');
 
-INSERT INTO tipo_comentario (nombre_tipo_comentario, descripcion_tipo) VALUES
+INSERT INTO tipos_comentarios (nombre_tipo_comentario, descripcion_tipo) VALUES
 ('Ayuda',       'Solicitud de ayuda al usuario'),
 ('Opinion',     'Opinión general sobre el sistema'),
 ('Sugerencia',  'Sugerencia de mejora'),
