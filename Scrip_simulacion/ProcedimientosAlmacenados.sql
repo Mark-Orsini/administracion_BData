@@ -1,7 +1,7 @@
 -- ==========================================================
 -- SCRIPT 3: PROCEDIMIENTOS ALMACENADOS
 -- ==========================================================
-USE ciberseguridad_db;
+USE ciberseguridad_educacion;
 
 -- ==========================================================
 -- PROCEDIMIENTOS PARA LA TABLA usuarios
@@ -10,7 +10,7 @@ USE ciberseguridad_db;
 -- Insertar usuario
 DELIMITER $$
 CREATE PROCEDURE sp_insertar_usuario (
-    IN p_nombre VARCHAR(50),
+    IN p_nombre VARCHAR(100), -- Cambiado de 50 a 100
     IN p_correo VARCHAR(100),
     IN p_contrasena VARCHAR(255),
     IN p_tipo_usuario_id INT
@@ -23,17 +23,16 @@ DELIMITER ;
 
 -- Borrado lógico
 DELIMITER $$
-CREATE PROCEDURE sp_borrar_usuario (IN p_usuario_id INT)
+CREATE PROCEDURE sp_borrar_tipo_usuario (IN p_id INT)
 BEGIN
-    UPDATE usuarios SET activo = FALSE WHERE usuario_id = p_usuario_id;
+    UPDATE tipos_usuarios SET deleted = TRUE WHERE tipo_usuario_id = p_id;
 END$$
 DELIMITER ;
 
--- Mostrar usuarios activos
 DELIMITER $$
-CREATE PROCEDURE sp_mostrar_usuarios_activos()
+CREATE PROCEDURE sp_mostrar_tipos_usuarios_activos()
 BEGIN
-    SELECT * FROM usuarios WHERE activo = TRUE;
+    SELECT * FROM tipos_usuarios WHERE deleted = FALSE;
 END$$
 DELIMITER ;
 
