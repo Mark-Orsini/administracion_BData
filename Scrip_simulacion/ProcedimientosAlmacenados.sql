@@ -50,9 +50,9 @@ DELIMITER ;
 
 -- Ejemplo para tipos_usuarios
 DELIMITER $$
-CREATE PROCEDURE sp_insertar_tipo_usuario (IN p_nombre VARCHAR(50), IN p_desc VARCHAR(255))
+CREATE PROCEDURE sp_borrar_tipo_usuario (IN p_id INT)
 BEGIN
-    INSERT INTO tipos_usuarios (nombre_tipo_usuario, descripcion_tipo) VALUES (p_nombre, p_desc);
+    UPDATE tipos_usuarios SET activo = FALSE WHERE tipo_usuario_id = p_id;
 END$$
 DELIMITER ;
 
