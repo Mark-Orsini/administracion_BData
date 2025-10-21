@@ -9,7 +9,7 @@ import mysql.connector
 conexion = mysql.connector.connect(
     host="localhost",          # Servidor (puede ser "127.0.0.1")
     user="root",               # Usuario de MySQL
-    password="Bora.65536-1",  # Cambia por tu contraseña real
+    password="1234",  # Cambia por tu contraseña real
     database="empresa"         # Nombre de la base de datos
 )
 
